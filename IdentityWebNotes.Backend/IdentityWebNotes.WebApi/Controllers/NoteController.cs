@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Text.Json;
+using AutoMapper;
 using IdentityWebNotes.Application.Notes.Commands.CreateNote;
 using IdentityWebNotes.Application.Notes.Commands.DeleteNote;
 using IdentityWebNotes.Application.Notes.Commands.UpdateNote;
@@ -47,7 +48,7 @@ public class NoteController : BaseController
     {
         var command = _mapper.Map<CreateNoteCommand>(createNoteDto);
         command.UserId = base.UserId;
-        
+
         Guid noteId = await Mediator.Send(command);
 
         return Ok(noteId);

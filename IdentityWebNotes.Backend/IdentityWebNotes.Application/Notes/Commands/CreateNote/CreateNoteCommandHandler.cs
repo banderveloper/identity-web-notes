@@ -1,4 +1,5 @@
-﻿using IdentityWebNotes.Application.Interfaces;
+﻿using System.Text.Json;
+using IdentityWebNotes.Application.Interfaces;
 using IdentityWebNotes.Domain;
 using MediatR;
 
@@ -28,7 +29,7 @@ public class CreateNoteCommandHandler : IRequestHandler<CreateNoteCommand, Guid>
             CreationDate = DateTime.Now,
             EditDate = null
         };
-
+        
         // adding to db
         _context.Notes.Add(note);
         await _context.SaveChangesAsync(cancellationToken);
