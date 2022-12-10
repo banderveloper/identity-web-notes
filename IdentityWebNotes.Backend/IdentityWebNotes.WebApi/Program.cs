@@ -10,6 +10,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
 
+// Injection CORS (Cross-Origin Resource Sharing), for access from any client
+builder.Services.AddCors(options =>
+{
+    // Allow any client, source and resource (for simplify)
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyHeader();
+        policy.AllowAnyMethod();
+        policy.AllowAnyOrigin();
+    });
+});
+
 // Injecting automapper configuration for automapping through IMapWith<>
 builder.Services.AddAutoMapper(config =>
 {
@@ -26,8 +38,16 @@ try
 }
 catch (Exception ex)
 {
+    // todo
 }
 
 
+
 var app = builder.Build();
+
+app.UseHttpsRedirection();
+app.UseCors("AllowAny");
+
+app.MapControllers();
+
 app.Run();
