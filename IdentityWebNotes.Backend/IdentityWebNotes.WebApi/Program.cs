@@ -3,6 +3,7 @@ using IdentityWebNotes.Application;
 using IdentityWebNotes.Application.Common.Mappings;
 using IdentityWebNotes.Application.Interfaces;
 using IdentityWebNotes.Persistence;
+using IdentityWebNotes.WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,7 @@ catch (Exception ex)
 
 var app = builder.Build();
 
+app.UseCustomExceptionHandler();
 app.UseHttpsRedirection();
 app.UseCors("AllowAny");
 
