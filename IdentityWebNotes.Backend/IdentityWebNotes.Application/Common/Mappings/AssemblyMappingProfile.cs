@@ -8,7 +8,7 @@ public class AssemblyMappingProfile : Profile
     public AssemblyMappingProfile(Assembly assembly)
         => ApplyMappingsFromAssembly(assembly);
 
-    // Method invoked at MAIN, when server starts, applies mapping profiles for each type
+    // Method invoked at MAIN, when server starts, applies mapping profiles (calls Mapping method) for each type that inherits from IMapWith
     private void ApplyMappingsFromAssembly(Assembly assembly)
     {
         // Get all classes than implements IMapWith interface
@@ -24,7 +24,7 @@ public class AssemblyMappingProfile : Profile
             // locally creates instance of class than inherits from IMapWith
             var instance = Activator.CreateInstance(iMapWithImplementer);
 
-            // gets CUSTOM Mapping method realisation, or DEFAULT realisation described in class-implementer
+            // gets CUSTOM Mapping method realisation, or DEFAULT realisation described in IMapWith
             var method = iMapWithImplementer.GetMethod("Mapping");
 
             // invokes method Mapping at given instance at pass AssemblyMappingProfile there
