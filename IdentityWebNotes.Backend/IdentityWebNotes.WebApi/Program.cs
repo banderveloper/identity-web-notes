@@ -10,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
 
+builder.Services.AddControllers();
+
 // Injection CORS (Cross-Origin Resource Sharing), for access from any client
 builder.Services.AddCors(options =>
 {
