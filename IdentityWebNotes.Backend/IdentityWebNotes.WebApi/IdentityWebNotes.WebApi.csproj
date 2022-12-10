@@ -7,4 +7,13 @@
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\IdentityWebNotes.Application\IdentityWebNotes.Application.csproj" />
+      <ProjectReference Include="..\IdentityWebNotes.Persistence\IdentityWebNotes.Persistence.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    </ItemGroup>
+
 </Project>
