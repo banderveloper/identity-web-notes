@@ -2,7 +2,7 @@
 
 namespace IdentityWebNotes.Application.Notes.Commands.CreateNote;
 
-// CQRS command, used for CreateNoteCommandHandler, returns Guid of created note
+// CQRS command for CreateNoteCommandHandler
 public class CreateNoteCommand : IRequest<Guid>
 {
     public Guid UserId { get; set; }

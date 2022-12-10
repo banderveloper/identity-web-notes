@@ -10,11 +10,10 @@ public class CreateNoteCommandHandler : IRequestHandler<CreateNoteCommand, Guid>
     private readonly INotesDbContext _context;
 
     public CreateNoteCommandHandler(INotesDbContext context)
-    {
-        _context = context;
-    }
+        => _context = context;
 
-    // Creates new note. Accepts create note command with user id, title and details
+
+    // Creates new note and saves to db. Accepts create note command with user id, title and details
     // returns Guid of new created note
     public async Task<Guid> Handle(CreateNoteCommand request, CancellationToken cancellationToken)
     {
