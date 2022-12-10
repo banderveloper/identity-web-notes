@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using AutoMapper;
+﻿using AutoMapper;
 using IdentityWebNotes.Application.Notes.Commands.CreateNote;
 using IdentityWebNotes.Application.Notes.Commands.DeleteNote;
 using IdentityWebNotes.Application.Notes.Commands.UpdateNote;

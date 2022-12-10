@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using IdentityWebNotes.Application.Interfaces;
+﻿using IdentityWebNotes.Application.Interfaces;
 using IdentityWebNotes.Domain;
 using MediatR;
 
