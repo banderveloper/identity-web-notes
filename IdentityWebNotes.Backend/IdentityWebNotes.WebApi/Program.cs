@@ -50,7 +50,7 @@ var app = builder.Build();
 
 app.UseCustomExceptionHandler();
 app.UseHttpsRedirection();
-app.UseCors("AllowAny");
+app.UseCors("AllowAll");
 
 app.MapControllers();
 
