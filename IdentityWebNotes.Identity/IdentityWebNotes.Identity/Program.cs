@@ -1,8 +1,10 @@
-using IdentityServer4.Models;
 using IdentityWebNotes.Identity;
 
 var builder = WebApplication.CreateBuilder();
 
+
+
+// Inject custom identity configuration
 builder.Services.AddIdentityServer()
     .AddInMemoryApiResources(Configuration.ApiResources)
     .AddInMemoryIdentityResources(Configuration.IdentityResources)
