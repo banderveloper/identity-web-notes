@@ -44,7 +44,7 @@ public class NotesContextFactory
                 CreationDate = DateTime.Today,
                 Details = "Details3",
                 EditDate = null,
-                Id = Guid.Parse("D871E547-7738-4BD5-B033-16E51E6C2702"),
+                Id = NoteIdForDelete,
                 Title = "Title3",
                 UserId = UserAId
             },
@@ -53,7 +53,7 @@ public class NotesContextFactory
                 CreationDate = DateTime.Today,
                 Details = "Details4",
                 EditDate = null,
-                Id = Guid.Parse("357B77D6-AD73-41E4-89CD-DBCFFDAA0142"),
+                Id = NoteIdForUpdate,
                 Title = "Title4",
                 UserId = UserBId
             }
