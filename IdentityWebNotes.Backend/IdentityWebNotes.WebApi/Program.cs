@@ -47,6 +47,8 @@ builder.Services.AddAuthentication(config =>
         options.RequireHttpsMetadata = false;
     });
 
+builder.Services.AddSwaggerGen();
+
 // Getting NotesDbContext from services, add pass it to DbInitializer
 try
 {
@@ -63,6 +65,16 @@ catch (Exception ex)
 var app = builder.Build();
 
 app.UseCustomExceptionHandler();
+
+app.UseSwagger();
+app.UseSwaggerUI(config =>
+{
+    // get to swagger UI using root uri
+    config.RoutePrefix = string.Empty;
+    
+    config.SwaggerEndpoint("swagger/v1/swagger.json", "IdentityNotes API");
+});
+
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 
