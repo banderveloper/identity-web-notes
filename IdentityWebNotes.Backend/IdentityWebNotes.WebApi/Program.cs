@@ -3,8 +3,12 @@ using IdentityWebNotes.Application;
 using IdentityWebNotes.Application.Common.Mappings;
 using IdentityWebNotes.Application.Interfaces;
 using IdentityWebNotes.Persistence;
+using IdentityWebNotes.WebApi;
 using IdentityWebNotes.WebApi.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +51,11 @@ builder.Services.AddAuthentication(config =>
         options.RequireHttpsMetadata = false;
     });
 
+builder.Services.AddVersionedApiExplorer(options => { options.GroupNameFormat = "'v'VVV"; });
+
+builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>,
+    ConfigureSwaggerOptions>();
+
 builder.Services.AddSwaggerGen(config =>
 {
     // including xml comments and path to them
@@ -54,6 +63,9 @@ builder.Services.AddSwaggerGen(config =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     config.IncludeXmlComments(xmlPath);
 });
+
+builder.Services.AddApiVersioning();
+
 
 // Getting NotesDbContext from services, add pass it to DbInitializer
 try
@@ -72,6 +84,8 @@ var app = builder.Build();
 
 app.UseCustomExceptionHandler();
 
+
+
 app.UseSwagger();
 app.UseSwaggerUI(config =>
 {
@@ -82,10 +96,13 @@ app.UseSwaggerUI(config =>
 });
 
 app.UseHttpsRedirection();
+
 app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseApiVersioning();
 
 app.MapControllers();
 

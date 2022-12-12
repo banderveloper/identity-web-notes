@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityWebNotes.WebApi.Controllers;
 
+[ApiVersion("1.0")]
+// [ApiVersionNeutral] // if api version is not set
 [Produces("application/json")] // for xml docs
 [Authorize]
-[Route("api/[controller]")]
+[Route("api/{version:apiVersion}/[controller]")]
 public class NoteController : BaseController
 {
     private IMapper _mapper;
