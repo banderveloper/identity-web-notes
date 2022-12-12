@@ -4,6 +4,7 @@ using IdentityWebNotes.Application.Common.Mappings;
 using IdentityWebNotes.Application.Interfaces;
 using IdentityWebNotes.Persistence;
 using IdentityWebNotes.WebApi.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,20 @@ builder.Services.AddAutoMapper(config =>
     config.AddProfile(new AssemblyMappingProfile(typeof(INotesDbContext).Assembly));
 });
 
+builder.Services.AddAuthentication(config =>
+    {
+        config.DefaultAuthenticateScheme =
+            JwtBearerDefaults.AuthenticationScheme;
+        config.DefaultAuthenticateScheme =
+            JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "https://localhost:5001/";
+        options.Audience = "notesapi";
+        options.RequireHttpsMetadata = false;
+    });
+
 // Getting NotesDbContext from services, add pass it to DbInitializer
 try
 {
@@ -45,12 +60,14 @@ catch (Exception ex)
 }
 
 
-
 var app = builder.Build();
 
 app.UseCustomExceptionHandler();
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

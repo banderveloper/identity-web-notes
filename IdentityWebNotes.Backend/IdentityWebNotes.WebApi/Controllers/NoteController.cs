@@ -5,10 +5,12 @@ using IdentityWebNotes.Application.Notes.Commands.UpdateNote;
 using IdentityWebNotes.Application.Notes.Queries.GetNoteDetails;
 using IdentityWebNotes.Application.Notes.Queries.GetNoteList;
 using IdentityWebNotes.WebApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityWebNotes.WebApi.Controllers;
 
+[Authorize]
 [Route("api/[controller]")]
 public class NoteController : BaseController
 {
