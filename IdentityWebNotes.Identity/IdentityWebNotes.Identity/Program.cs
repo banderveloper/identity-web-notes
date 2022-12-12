@@ -3,6 +3,7 @@ using IdentityWebNotes.Identity.Data;
 using IdentityWebNotes.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder();
 
@@ -12,12 +13,12 @@ builder.Services.AddDbContext<AuthDbContext>(options =>
 
 // Adds and configures the identity system for the specified User and Role types.
 builder.Services.AddIdentity<AppUser, IdentityRole>(config =>
-{
-    config.Password.RequiredLength = 4;
-    config.Password.RequireDigit = false;
-    config.Password.RequireNonAlphanumeric = false;
-    config.Password.RequireUppercase = false;
-})
+    {
+        config.Password.RequiredLength = 4;
+        config.Password.RequireDigit = false;
+        config.Password.RequireNonAlphanumeric = false;
+        config.Password.RequireUppercase = false;
+    })
     .AddEntityFrameworkStores<AuthDbContext>()
     .AddDefaultTokenProviders();
 
@@ -54,6 +55,13 @@ catch (Exception ex)
 }
 
 var app = builder.Build();
+
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(app.Environment.ContentRootPath, "Styles")),
+    RequestPath = "/styles"
+});
 
 app.UseIdentityServer();
 app.MapDefaultControllerRoute();

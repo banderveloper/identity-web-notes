@@ -1,0 +1,26 @@
+﻿.input{
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    width: 100%;
+}
+
+.header {
+    font-family: Arial, sans-serif;
+    color: #332600;
+    font-size: 30px;
+    text-align: center;
+}
+
+.button{
+    font-size: 16px;
+    background-color: #a191bd;
+    border-radius: 4px;
+    color: #332600;
+    font-family: Arial, sans-serif;
+    width: 100%;
+}
+
+.block{
+    margin-top: 10px;
+}
