@@ -5,7 +5,7 @@ using IdentityWebNotes.Persistence;
 
 namespace IdentityWebNotes.Tests.Common;
 
-// Class for "injecting" into tests classes constructors
+// Class for "injecting" into tests classes constructors for cqrs QUERIES
 public class QueryTestFixture : IDisposable
 {
     public NotesDbContext Context;
