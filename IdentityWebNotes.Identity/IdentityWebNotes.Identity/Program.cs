@@ -38,6 +38,8 @@ builder.Services.ConfigureApplicationCookie(config =>
     config.LogoutPath = "/Auth/Logout";
 });
 
+builder.Services.AddControllersWithViews();
+
 // Initialize db via DbInitializer, or log error
 var scope = builder.Services.BuildServiceProvider().CreateScope();
 try
@@ -54,5 +56,6 @@ catch (Exception ex)
 var app = builder.Build();
 
 app.UseIdentityServer();
+app.MapDefaultControllerRoute();
 
 app.Run();
